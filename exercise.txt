@@ -1,0 +1,42 @@
+1.
+answer:
+Anand Beck
+sql:
+SELECT member.name FROM member,checkout_item,book WHERE book.id=checkout_item.book_id and checkout_item.member_id=member.id and book.title="The Hobbit"; 
+
+2.
+answer:
+37
+sql:
+SELECT count(*) FROM member WHERE id not in (SELECT checkout_item.member_id FROM checkout_item);
+
+3.
+answer:
+1984
+Catcher in the Rye
+Crouching Tiger, Hidden Dragon
+Domain Driven Design
+Fellowship of the Ring
+Lawrence of Arabia
+Office Space
+Thin Red Line
+To Kill a Mockingbird
+Tom Sawyer
+sql:SELECT book.title FROM book WHERE book.id not in (SELECT checkout_item.book_id FROM checkout_item WHERE checkout_item.book_id is NOT NULL) UNION
+SELECT movie.title FROM movie WHERE movie.id not in (SELECT checkout_item.movie_id FROM checkout_item WHERE checkout_item.movie_id is NOT NULL);
+
+4.
+answer:
+Jack
+sql:
+INSERT INTO book("title") values("The Pragmatic Programmer");
+INSERT INTO member("name") values("Jack");
+INSERT INTO checkout_item("member_id","book_id") values(43,11);
+SELECT member.name FROM member,checkout_item,book WHERE book.id=checkout_item.book_id and checkout_item.member_id=member.id and book.title="The Pragmatic Programmer"; 
+
+5.
+answer:
+Anand Beck
+Frank Smith
+sql:
+SELECT member.name FROM member WHERE member.id in (SELECT checkout_item.member_id FROM checkout_item group by checkout_item.member_id having count(*)>1);
